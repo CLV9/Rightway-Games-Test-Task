@@ -4,15 +4,12 @@ namespace Gameplay.Helpers
 {
     public static class GameAreaHelper
     {
-
         private static Camera _camera;
         
-
         static GameAreaHelper()
         {
             _camera = Camera.main;
         }
-
         
         public static bool IsInGameplayArea(Transform objectTransform, Bounds objectBounds)
         {
@@ -32,6 +29,5 @@ namespace Gameplay.Helpers
                 && (objectPos.y + objectBounds.extents.y > bottomBound);
 
         }
-        
     }
 }

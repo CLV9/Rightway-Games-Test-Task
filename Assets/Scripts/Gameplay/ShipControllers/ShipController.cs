@@ -6,15 +6,7 @@ namespace Gameplay.ShipControllers
 {
     public abstract class ShipController : MonoBehaviour
     {
-
         private ISpaceship _spaceship;
-
-
-        public void Init(ISpaceship spaceship)
-        {
-            _spaceship = spaceship;
-        }
-
 
         private void Update()
         {
@@ -22,8 +14,13 @@ namespace Gameplay.ShipControllers
             ProcessFire(_spaceship.WeaponSystem);
         }
 
+        public void Init(ISpaceship spaceship)
+        {
+            _spaceship = spaceship;
+        }
 
         protected abstract void ProcessHandling(MovementSystem movementSystem);
+        
         protected abstract void ProcessFire(WeaponSystem fireSystem);
     }
 }

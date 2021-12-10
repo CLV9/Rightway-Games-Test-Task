@@ -1,17 +1,12 @@
-﻿
-
-namespace Gameplay.Weapons
+﻿namespace Gameplay.Weapons
 {
     public interface IDamagable
     {
-    
         UnitBattleIdentity BattleIdentity { get; }
 
         void ApplyDamage(IDamageDealer damageDealer);
-
     }
-
-
+    
     public enum UnitBattleIdentity
     {
         Neutral,

@@ -1,24 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Gameplay.Helpers;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class OutOfBorderDestructor : MonoBehaviour
+namespace Gameplay.Helpers
 {
-
-    [SerializeField]
-    private SpriteRenderer _representation;
-    
-    void Update()
+    public class OutOfBorderDestructor : MonoBehaviour
     {
-        CheckBorders();
-    }
+        [SerializeField]
+        private SpriteRenderer _representation;
     
-    private void CheckBorders()
-    {
-        if(!GameAreaHelper.IsInGameplayArea(transform, _representation.bounds))
+        private void Update()
         {
-            Destroy(gameObject);
+            CheckBorders();
+        }
+    
+        private void CheckBorders()
+        {
+            if(!GameAreaHelper.IsInGameplayArea(transform, _representation.bounds))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

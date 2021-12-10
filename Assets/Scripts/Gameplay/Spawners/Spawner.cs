@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,7 +6,6 @@ namespace Gameplay.Spawners
 {
     public class Spawner : MonoBehaviour
     {
-
         [SerializeField]
         private GameObject _object;
         
@@ -22,15 +20,13 @@ namespace Gameplay.Spawners
 
         [SerializeField]
         private bool _autoStart = true;
-
-
+        
         private void Start()
         {
             if (_autoStart)
                 StartSpawn();
         }
-
-
+        
         public void StartSpawn()
         {
             StartCoroutine(Spawn());
@@ -40,7 +36,6 @@ namespace Gameplay.Spawners
         {
             StopAllCoroutines();
         }
-
 
         private IEnumerator Spawn()
         {
