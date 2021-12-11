@@ -1,10 +1,9 @@
-﻿using Gameplay.ShipSystems;
-using Gameplay.Weapons;
+﻿using Gameplay.Core;
 
 namespace Gameplay.Spaceships
 {
-    public interface ISpaceship
+    public interface ISpaceship : IBattleUnit
     {
-        UnitBattleIdentity BattleIdentity { get; }
+
     }
 }

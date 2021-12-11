@@ -1,13 +1,13 @@
 ﻿using Gameplay.Helpers;
 using UnityEngine;
 
-namespace Gameplay.ShipSystems
+namespace Gameplay.MovementSystems
 {
     public class PlayerMovementSystem : MovementSystem
     {
         [SerializeField] private SpriteRenderer _hull;
         
-        protected override void ProcessMovement()
+        private void Update()
         {
             var amount = Input.GetAxis("Horizontal") * Time.deltaTime;
            // var potentialPos = LateralMovementNewPosition(amount);

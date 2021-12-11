@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lateralMovementSpeed: 0
-  _longitudinalMovementSpeed: 10
+  _longitudinalMovementSpeed: 3
 --- !u!114 &1604386304354027643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e85c7006d6b44ac8a9d4c8ee0ee1679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxValue: 100
+  _maxHealth: 100
 --- !u!50 &7280752513643992934
 Rigidbody2D:
   serializedVersion: 4

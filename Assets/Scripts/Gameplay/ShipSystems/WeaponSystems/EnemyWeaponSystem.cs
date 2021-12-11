@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Gameplay.ShipSystems
 {
@@ -7,23 +6,15 @@ namespace Gameplay.ShipSystems
     {
         [SerializeField] 
         private Vector2 _fireDelay;
-
-        private bool _fire = true;
-
-        private IEnumerator FireDelay(float delay)
-        {
-            _fire = false;
-            yield return new WaitForSeconds(delay);
-            _fire = true;
-        }
         
+        protected override float GetFireDelay()
+        {
+            return Random.Range(_fireDelay.x / _energy, _fireDelay.y / _energy);
+        }
+
         protected override void ProcessFire()
         {
-            if (!_fire)
-                return;
-
             TriggerFire();
-            StartCoroutine(FireDelay(Random.Range(_fireDelay.x, _fireDelay.y)));
         }
     }
 }

@@ -1,11 +1,12 @@
-﻿namespace Gameplay.Weapons
+﻿using UnityEngine;
+
+namespace Gameplay.Core
 {
-    public interface IHealthSystem
+    public interface IBattleUnit
     {
         UnitBattleIdentity BattleIdentity { get; }
-        void ApplyDamage(IDamageDealer damageDealer);
     }
-    
+        
     public enum UnitBattleIdentity
     {
         Neutral,
@@ -13,5 +14,3 @@
         Enemy
     }
 }
-
-

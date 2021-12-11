@@ -7,7 +7,7 @@ namespace Gameplay.Spawners
     public class Spawner : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _object;
+        private GameObject[] _objects;
         
         [SerializeField]
         private Transform _parent;
@@ -20,7 +20,9 @@ namespace Gameplay.Spawners
 
         [SerializeField]
         private bool _autoStart = true;
-        
+
+        private Coroutine _spawnRoutine;
+
         private void Start()
         {
             if (_autoStart)
@@ -29,12 +31,12 @@ namespace Gameplay.Spawners
         
         public void StartSpawn()
         {
-            StartCoroutine(Spawn());
+            _spawnRoutine = StartCoroutine(Spawn());
         }
 
         public void StopSpawn()
         {
-            StopAllCoroutines();
+            StopCoroutine(_spawnRoutine);
         }
 
         private IEnumerator Spawn()
@@ -43,7 +45,8 @@ namespace Gameplay.Spawners
             
             while (true)
             {
-                Instantiate(_object, transform.position, transform.rotation, _parent);
+                var objectToInstantiate = _objects[Random.Range(0, _objects.Length)];
+                Instantiate(objectToInstantiate, transform.position, transform.rotation, _parent);
                 yield return new WaitForSeconds(Random.Range(_spawnPeriodRange.x, _spawnPeriodRange.y));
             }
         }

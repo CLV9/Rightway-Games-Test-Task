@@ -1,29 +1,17 @@
-﻿using UnityEngine;
+﻿using Gameplay.Core;
+using Gameplay.ShipSystems;
+using UnityEngine;
 
 namespace Gameplay.Weapons.Projectiles
 {
-    public abstract class Projectile : MonoBehaviour, IDamageDealer
+    public abstract class Projectile : MonoBehaviour, IDamageDealer, IBattleUnit
     {
-        [SerializeField]
-        private float _speed;
-
         [SerializeField] 
         private float _damage;
-        
-        private UnitBattleIdentity _battleIdentity;
-        public UnitBattleIdentity BattleIdentity => _battleIdentity;
+
+        public UnitBattleIdentity BattleIdentity { get; private set; }
         public float Damage => _damage;
-
-        private void Update()
-        {
-            Move(_speed);
-        }
-
-        public void Init(UnitBattleIdentity battleIdentity)
-        {
-            _battleIdentity = battleIdentity;
-        }
-
+        
         private void OnCollisionEnter2D(Collision2D other)
         {
             var damagableObject = other.gameObject.GetComponent<IHealthSystem>();
@@ -35,6 +23,9 @@ namespace Gameplay.Weapons.Projectiles
             }
         }
 
-        protected abstract void Move(float speed);
+        public void Init(UnitBattleIdentity battleIdentity)
+        {
+            BattleIdentity = battleIdentity;
+        }
     }
 }

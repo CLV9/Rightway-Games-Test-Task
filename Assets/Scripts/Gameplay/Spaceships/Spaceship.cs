@@ -1,10 +1,11 @@
-﻿using Gameplay.ShipSystems;
+﻿using Gameplay.Core;
+using Gameplay.ShipSystems;
 using Gameplay.Weapons;
 using UnityEngine;
 
 namespace Gameplay.Spaceships
 {
-    public class Spaceship : MonoBehaviour, ISpaceship
+    public class Spaceship : MonoBehaviour, ISpaceship, IBattleUnit
     {
         [SerializeField]
         private UnitBattleIdentity _battleIdentity;

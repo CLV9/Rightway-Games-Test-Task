@@ -1,18 +1,23 @@
 ﻿using UnityEngine;
 
-namespace Gameplay.ShipSystems
+namespace Gameplay.MovementSystems
 {
-    public abstract class MovementSystem : MonoBehaviour, IShipProcess
-    {
+    public abstract class MovementSystem : MonoBehaviour
+    {        
         [SerializeField]
-        private float _lateralMovementSpeed;
+        protected float _lateralMovementSpeed;
         
         [SerializeField]
-        private float _longitudinalMovementSpeed;
+        protected float _longitudinalMovementSpeed;
 
         public Vector3 LateralMovementNewPosition(float amount)
         {
             return transform.position + transform.TransformDirection(amount * Vector3.right);
+        }
+        
+        public Vector3 LongitudinalMovementNewPosition(float amount)
+        {
+            return transform.position + transform.TransformDirection(amount * Vector3.up);
         }
 
         public void LateralMovement(float amount)
@@ -25,16 +30,9 @@ namespace Gameplay.ShipSystems
             Move(amount * _longitudinalMovementSpeed, Vector3.up);
         }
 
-        public void Process()
-        {
-            ProcessMovement();
-        }
-
-        private void Move(float amount, Vector3 axis)
+        protected void Move(float amount, Vector3 axis)
         {
             transform.Translate(amount * axis.normalized);
         }
-
-        protected abstract void ProcessMovement();
     }
 }
