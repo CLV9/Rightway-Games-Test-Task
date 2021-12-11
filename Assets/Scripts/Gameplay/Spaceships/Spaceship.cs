@@ -1,41 +1,45 @@
-﻿using System;
-using Gameplay.ShipControllers;
-using Gameplay.ShipSystems;
+﻿using Gameplay.ShipSystems;
 using Gameplay.Weapons;
 using UnityEngine;
 
 namespace Gameplay.Spaceships
 {
-    public class Spaceship : MonoBehaviour, ISpaceship, IDamagable
+    public class Spaceship : MonoBehaviour, ISpaceship
     {
-        [SerializeField]
-        private ShipController _shipController;
-    
-        [SerializeField]
-        private MovementSystem _movementSystem;
-    
-        [SerializeField]
-        private WeaponSystem _weaponSystem;
-
         [SerializeField]
         private UnitBattleIdentity _battleIdentity;
 
-
-        public MovementSystem MovementSystem => _movementSystem;
-        public WeaponSystem WeaponSystem => _weaponSystem;
-
+        private IShipSystem[] _systems;
+        private IShipProcess[] _processes;
+        
         public UnitBattleIdentity BattleIdentity => _battleIdentity;
 
         private void Start()
         {
-            _shipController.Init(this);
-            _weaponSystem.Init(_battleIdentity);
+            InitSystems();
+            InitProcesses();
         }
 
-        public void ApplyDamage(IDamageDealer damageDealer)
+        private void Update()
         {
-            Destroy(gameObject);
+            foreach (var process in _processes)
+            {
+                process.Process();
+            }
         }
 
+        private void InitProcesses()
+        {
+            _processes = GetComponents<IShipProcess>();
+        }
+
+        private void InitSystems()
+        {
+            _systems = GetComponents<IShipSystem>();
+            foreach (var system in _systems)
+            {
+                system.Init(this);
+            }
+        }
     }
 }

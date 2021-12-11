@@ -1,9 +1,8 @@
 ﻿namespace Gameplay.Weapons
 {
-    public interface IDamagable
+    public interface IHealthSystem
     {
         UnitBattleIdentity BattleIdentity { get; }
-
         void ApplyDamage(IDamageDealer damageDealer);
     }
     

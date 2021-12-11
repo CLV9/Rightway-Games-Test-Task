@@ -14,7 +14,7 @@ namespace Gameplay.Helpers
     
         private void CheckBorders()
         {
-            if(!GameAreaHelper.IsInGameplayArea(transform, _representation.bounds))
+            if(!GameAreaHelper.IsInGameplayArea(_representation.bounds))
             {
                 Destroy(gameObject);
             }

@@ -1,10 +1,9 @@
 ﻿using System.Collections;
-using Gameplay.ShipSystems;
 using UnityEngine;
 
-namespace Gameplay.ShipControllers.CustomControllers
+namespace Gameplay.ShipSystems
 {
-    public class EnemyShipController : ShipController
+    public class EnemyWeaponSystem : WeaponSystem
     {
         [SerializeField] 
         private Vector2 _fireDelay;
@@ -17,18 +16,13 @@ namespace Gameplay.ShipControllers.CustomControllers
             yield return new WaitForSeconds(delay);
             _fire = true;
         }
-
-        protected override void ProcessHandling(MovementSystem movementSystem)
-        {
-            movementSystem.LongitudinalMovement(Time.deltaTime);
-        }
-
-        protected override void ProcessFire(WeaponSystem fireSystem)
+        
+        protected override void ProcessFire()
         {
             if (!_fire)
                 return;
 
-            fireSystem.TriggerFire();
+            TriggerFire();
             StartCoroutine(FireDelay(Random.Range(_fireDelay.x, _fireDelay.y)));
         }
     }

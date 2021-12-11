@@ -4,30 +4,56 @@ namespace Gameplay.Helpers
 {
     public static class GameAreaHelper
     {
-        private static Camera _camera;
+        private static GameAreaBounds _bounds;
         
         static GameAreaHelper()
         {
-            _camera = Camera.main;
+            CalculateBounds();
         }
-        
-        public static bool IsInGameplayArea(Transform objectTransform, Bounds objectBounds)
+
+        private static void CalculateBounds()
         {
-            var camHalfHeight = _camera.orthographicSize;
-            var camHalfWidth = camHalfHeight * _camera.aspect;
-            var camPos = _camera.transform.position;
+            var camera = Camera.main;
+            var camHalfHeight = camera.orthographicSize;
+            var camHalfWidth = camHalfHeight * camera.aspect;
+            var camPos = camera.transform.position;
             var topBound = camPos.y + camHalfHeight;
             var bottomBound = camPos.y - camHalfHeight;
             var leftBound = camPos.x - camHalfWidth;
             var rightBound = camPos.x + camHalfWidth;
+            _bounds = new GameAreaBounds(topBound, bottomBound, leftBound, rightBound);
+        }
 
-            var objectPos = objectTransform.position;
+        public static bool FitInGameplayBounds(Vector3 objectPosition, Bounds objectBounds)
+        {
+            return (objectPosition.x + objectBounds.extents.x - _bounds.RightBound < Mathf.Epsilon)
+                   && (objectPosition.x - objectBounds.extents.x - _bounds.LeftBound > Mathf.Epsilon)
+                   && (objectPosition.y + objectBounds.extents.y - _bounds.TopBound < Mathf.Epsilon)
+                   && (objectPosition.y - objectBounds.extents.y - _bounds.BottomBound > Mathf.Epsilon);
+        }
 
-            return (objectPos.x - objectBounds.extents.x < rightBound)
-                && (objectPos.x + objectBounds.extents.x > leftBound)
-                && (objectPos.y - objectBounds.extents.y < topBound)
-                && (objectPos.y + objectBounds.extents.y > bottomBound);
+        public static bool IsInGameplayArea(Bounds objectBounds)
+        {
+            return (objectBounds.center.x - objectBounds.extents.x < _bounds.RightBound)
+                   && (objectBounds.center.x + objectBounds.extents.x > _bounds.LeftBound)
+                   && (objectBounds.center.y - objectBounds.extents.y < _bounds.TopBound)
+                   && (objectBounds.center.y + objectBounds.extents.y > _bounds.BottomBound);
+        }
+        
+        private struct GameAreaBounds
+        {
+            public float TopBound { get; set; }
+            public float BottomBound { get; set; }
+            public float LeftBound { get; set; }
+            public float RightBound { get; set; }
 
+            public GameAreaBounds(float topBound, float bottomBound, float leftBound, float rightBound)
+            {
+                TopBound = topBound;
+                BottomBound = bottomBound;
+                LeftBound = leftBound;
+                RightBound = rightBound;
+            }
         }
     }
 }

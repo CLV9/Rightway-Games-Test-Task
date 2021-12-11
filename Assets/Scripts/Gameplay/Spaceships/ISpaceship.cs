@@ -1,10 +1,10 @@
 ﻿using Gameplay.ShipSystems;
+using Gameplay.Weapons;
 
 namespace Gameplay.Spaceships
 {
     public interface ISpaceship
     {
-        MovementSystem MovementSystem { get; }
-        WeaponSystem WeaponSystem { get; }
+        UnitBattleIdentity BattleIdentity { get; }
     }
 }

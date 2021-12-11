@@ -26,7 +26,7 @@ namespace Gameplay.Weapons.Projectiles
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            var damagableObject = other.gameObject.GetComponent<IDamagable>();
+            var damagableObject = other.gameObject.GetComponent<IHealthSystem>();
             
             if (damagableObject != null 
                 && damagableObject.BattleIdentity != BattleIdentity)
