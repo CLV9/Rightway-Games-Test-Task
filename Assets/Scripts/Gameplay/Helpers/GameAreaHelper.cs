@@ -4,7 +4,7 @@ namespace Gameplay.Helpers
 {
     public static class GameAreaHelper
     {
-        private static GameAreaBounds _bounds;
+        public static GameAreaBounds Bounds { get; private set; }
         
         static GameAreaHelper()
         {
@@ -21,26 +21,18 @@ namespace Gameplay.Helpers
             var bottomBound = camPos.y - camHalfHeight;
             var leftBound = camPos.x - camHalfWidth;
             var rightBound = camPos.x + camHalfWidth;
-            _bounds = new GameAreaBounds(topBound, bottomBound, leftBound, rightBound);
-        }
-
-        public static bool FitInGameplayBounds(Vector3 objectPosition, Bounds objectBounds)
-        {
-            return (objectPosition.x + objectBounds.extents.x < _bounds.RightBound)
-                   && (objectPosition.x - objectBounds.extents.x > _bounds.LeftBound)
-                   && (objectPosition.y + objectBounds.extents.y < _bounds.TopBound)
-                   && (objectPosition.y - objectBounds.extents.y > _bounds.BottomBound);
+            Bounds = new GameAreaBounds(topBound, bottomBound, leftBound, rightBound);
         }
 
         public static bool IsInGameplayArea(Bounds objectBounds)
         {
-            return (objectBounds.center.x - objectBounds.extents.x < _bounds.RightBound)
-                   && (objectBounds.center.x + objectBounds.extents.x > _bounds.LeftBound)
-                   && (objectBounds.center.y - objectBounds.extents.y < _bounds.TopBound)
-                   && (objectBounds.center.y + objectBounds.extents.y > _bounds.BottomBound);
+            return (objectBounds.center.x - objectBounds.extents.x < Bounds.RightBound)
+                   && (objectBounds.center.x + objectBounds.extents.x > Bounds.LeftBound)
+                   && (objectBounds.center.y - objectBounds.extents.y < Bounds.TopBound)
+                   && (objectBounds.center.y + objectBounds.extents.y > Bounds.BottomBound);
         }
         
-        private struct GameAreaBounds
+        public struct GameAreaBounds
         {
             public float TopBound { get; set; }
             public float BottomBound { get; set; }

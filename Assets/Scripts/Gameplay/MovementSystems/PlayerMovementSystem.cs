@@ -10,15 +10,11 @@ namespace Gameplay.MovementSystems
         private void Update()
         {
             var amount = Input.GetAxis("Horizontal") * Time.deltaTime;
-           // var potentialPos = LateralMovementNewPosition(amount);
-           // if (FitInGameplayBounds(potentialPos))
-          //  {
-          //      LateralMovement(amount);
-          //  }
             LateralMovement(amount);
+            var positionX = Mathf.Clamp(transform.position.x, 
+                GameAreaHelper.Bounds.LeftBound + _hull.bounds.extents.x, 
+                GameAreaHelper.Bounds.RightBound - _hull.bounds.extents.x);
+            transform.position = new Vector3(positionX, transform.position.y);
         }
-        
-        private bool FitInGameplayBounds(Vector3 potentialPos) => 
-            GameAreaHelper.FitInGameplayBounds(potentialPos, _hull.bounds);
     }
 }

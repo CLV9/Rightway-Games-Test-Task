@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3596079745494406500}
   - component: {fileID: 3596079745494406499}
   - component: {fileID: 1907999581771285734}
+  - component: {fileID: 7217002198051677916}
   m_Layer: 0
   m_Name: EnergyBonus
   m_TagString: Untagged
@@ -110,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _battleIdentity: 1
   _time: 2
+  _energy: 2
 --- !u!61 &1907999581771285734
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -136,3 +138,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.96, y: 0.99333334}
   m_EdgeRadius: 0
+--- !u!114 &7217002198051677916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3596079745494406498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d380b7972717e499a083ffbf061981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _representation: {fileID: 3596079745494406501}
