@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Gameplay.ShipSystems
 {
-    public class HealthSystem : MonoBehaviour, IShipSystem, IHealthSystem
+    public class HealthSystem : MonoBehaviour, IHealthSystem
     {
         [SerializeField] private float _maxHealth;
 
@@ -13,6 +13,7 @@ namespace Gameplay.ShipSystems
         public float CurrentHealth { get; private set; }
         public UnitBattleIdentity BattleIdentity { get; private set; }
         
+        public event Action OnHealthLeft;
         public event Action OnCurrentHealthChanged;
         
         public void ApplyDamage(IDamageDealer damageDealer)
@@ -21,6 +22,7 @@ namespace Gameplay.ShipSystems
             OnCurrentHealthChanged?.Invoke();
             if (CurrentHealth <= 0)
             {
+                OnHealthLeft?.Invoke();
                 Destroy(gameObject);
             }
         }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Gameplay.Helpers
 {
@@ -6,7 +7,9 @@ namespace Gameplay.Helpers
     {
         [SerializeField]
         private SpriteRenderer _representation;
-    
+
+        public event Action OnOutOfBorderReached;
+        
         private void Update()
         {
             CheckBorders();
@@ -14,10 +17,9 @@ namespace Gameplay.Helpers
     
         private void CheckBorders()
         {
-            if(!GameAreaHelper.IsInGameplayArea(_representation.bounds))
-            {
-                Destroy(gameObject);
-            }
+            if (GameAreaHelper.IsInGameplayArea(_representation.bounds)) return;
+            OnOutOfBorderReached?.Invoke();
+            Destroy(gameObject);
         }
     }
 }

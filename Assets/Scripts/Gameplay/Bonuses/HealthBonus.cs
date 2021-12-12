@@ -1,4 +1,5 @@
 ﻿using Gameplay.ShipSystems;
+using Gameplay.Spaceships;
 using UnityEngine;
 
 namespace Gameplay.Bonuses
@@ -9,9 +10,9 @@ namespace Gameplay.Bonuses
         
         public float HealAmount => _heal;
         
-        protected override void ApplyBonus(Collision2D col)
+        protected override void ApplyBonus(ISpaceship spaceship)
         {
-            var healthSystem = col.gameObject.GetComponent<IHealthSystem>();
+            var healthSystem = spaceship.GetShipSystem<IHealthSystem>();
             if (healthSystem == null)
                 return;
             healthSystem.HealUp(this);

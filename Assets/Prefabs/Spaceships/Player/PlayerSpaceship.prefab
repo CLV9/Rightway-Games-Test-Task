@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6910651213156479276}
-  - component: {fileID: 6910651213156479315}
+  - component: {fileID: 3453288072889676281}
   - component: {fileID: 2875470456254297707}
   - component: {fileID: 7425838605817121530}
   - component: {fileID: 6460480931852784093}
@@ -117,7 +117,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6910651213156479315
+--- !u!114 &3453288072889676281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,10 +126,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6910651213156479279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4b0874c7d3308c4abf1c2bbfda5e8ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 67a50a9be8d1407c95c1043e565c0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _battleIdentity: 1
 --- !u!114 &2875470456254297707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +159,8 @@ MonoBehaviour:
   _weapons:
   - {fileID: 6910651213495973518}
   - {fileID: 8983208217998367586}
+  _energy: 0
+  _fireDelay: 0
 --- !u!114 &6460480931852784093
 MonoBehaviour:
   m_ObjectHideFlags: 0

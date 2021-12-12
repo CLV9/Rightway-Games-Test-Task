@@ -1,21 +1,19 @@
-﻿using Gameplay.Core;
+﻿using System.Linq;
+using Gameplay.Core;
+using Gameplay.Helpers;
 using Gameplay.ShipSystems;
-using Gameplay.Weapons;
 using UnityEngine;
 
 namespace Gameplay.Spaceships
 {
-    public class Spaceship : MonoBehaviour, ISpaceship, IBattleUnit
+    public abstract class Spaceship : MonoBehaviour, ISpaceship
     {
-        [SerializeField]
-        private UnitBattleIdentity _battleIdentity;
-
         private IShipSystem[] _systems;
         private IShipProcess[] _processes;
         
-        public UnitBattleIdentity BattleIdentity => _battleIdentity;
+        public abstract UnitBattleIdentity BattleIdentity { get; }
 
-        private void Start()
+        protected virtual void Start()
         {
             InitSystems();
             InitProcesses();
@@ -41,6 +39,11 @@ namespace Gameplay.Spaceships
             {
                 system.Init(this);
             }
+        }
+
+        public T GetShipSystem<T>() where T : IShipSystem
+        {
+            return (T)_systems.FirstOrDefault(x => x is T);
         }
     }
 }

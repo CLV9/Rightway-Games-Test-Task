@@ -1,6 +1,6 @@
 ﻿namespace Gameplay.ShipSystems
 {
-    public interface IWeaponSystem
+    public interface IWeaponSystem : IShipSystem, IShipProcess
     {
         void TakeEnergy(IEnergy energy);
     }

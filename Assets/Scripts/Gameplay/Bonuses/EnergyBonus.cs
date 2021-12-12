@@ -1,4 +1,5 @@
 ﻿using Gameplay.ShipSystems;
+using Gameplay.Spaceships;
 using UnityEngine;
 
 namespace Gameplay.Bonuses
@@ -14,9 +15,9 @@ namespace Gameplay.Bonuses
         public float Amount => _energy;
         public float Time => _time;
         
-        protected override void ApplyBonus(Collision2D col)
+        protected override void ApplyBonus(ISpaceship spaceship)
         {
-            var weaponSystem = col.gameObject.GetComponent<IWeaponSystem>();
+            var weaponSystem = spaceship.GetShipSystem<IWeaponSystem>();
             if (weaponSystem == null)
                 return;
             weaponSystem.TakeEnergy(this);

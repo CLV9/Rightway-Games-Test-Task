@@ -26,10 +26,10 @@ namespace Gameplay.Helpers
 
         public static bool FitInGameplayBounds(Vector3 objectPosition, Bounds objectBounds)
         {
-            return (objectPosition.x + objectBounds.extents.x - _bounds.RightBound < Mathf.Epsilon)
-                   && (objectPosition.x - objectBounds.extents.x - _bounds.LeftBound > Mathf.Epsilon)
-                   && (objectPosition.y + objectBounds.extents.y - _bounds.TopBound < Mathf.Epsilon)
-                   && (objectPosition.y - objectBounds.extents.y - _bounds.BottomBound > Mathf.Epsilon);
+            return (objectPosition.x + objectBounds.extents.x < _bounds.RightBound)
+                   && (objectPosition.x - objectBounds.extents.x > _bounds.LeftBound)
+                   && (objectPosition.y + objectBounds.extents.y < _bounds.TopBound)
+                   && (objectPosition.y - objectBounds.extents.y > _bounds.BottomBound);
         }
 
         public static bool IsInGameplayArea(Bounds objectBounds)

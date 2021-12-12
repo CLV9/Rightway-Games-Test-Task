@@ -1,4 +1,5 @@
 ﻿using Gameplay.Core;
+using Gameplay.Spaceships;
 using UnityEngine;
 
 namespace Gameplay.Bonuses
@@ -12,16 +13,16 @@ namespace Gameplay.Bonuses
 
         private void OnCollisionEnter2D(Collision2D col)
         {
-            var unit = col.gameObject.GetComponent<IBattleUnit>();
+            var spaceship = col.gameObject.GetComponent<ISpaceship>();
             
-            if (unit != null 
-                && unit.BattleIdentity == BattleIdentity)
+            if (spaceship != null 
+                && spaceship.BattleIdentity == BattleIdentity)
             {
-                ApplyBonus(col);
+                ApplyBonus(spaceship);
                 Destroy(gameObject);
             }
         }
 
-        protected abstract void ApplyBonus(Collision2D unit);
+        protected abstract void ApplyBonus(ISpaceship spaceship);
     }
 }

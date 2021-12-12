@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Gameplay.ShipSystems
 {
-    public abstract class WeaponSystem : MonoBehaviour, IShipSystem, IShipProcess, IWeaponSystem
+    public abstract class WeaponSystem : MonoBehaviour, IWeaponSystem
     {
         [SerializeField]
         private List<Weapon> _weapons;
